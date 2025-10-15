@@ -1,6 +1,6 @@
 ## Soil Metagenomics for ONT Sequencing
 
-**This repository is just a code demo and was copied (with permission)from the original USDA-ARS repository I created. This repository is only intended to demostrate my coding ability**
+**This repository is just a code demo and was copied (with permission) from the original USDA-ARS repository I created. This repository is only intended to demostrate my coding ability**
 
 ### Overview
 
