@@ -26,12 +26,12 @@ Here we capitlize on a new technique developed by nanopore called [duplex baseca
 
 Even with a low number of reads which were actually duplexed (mean = 16%) the sequencing error rate was pretty good which is explored in the next step.
 
-**More detailed notes:** [[01_base_calls]]
+**More detailed notes:** [burgess_notebook/01_base_calls.md](burgess_notebook/01_base_calls.md)
 ### 02 Quality Filtering
 
 Here I used two different approaches to filter out the poor reads: i) remove reads with less than Phred Q score of 10 and ii) trim reads till they had a Phred Q score of > 10. We got pretty similar results between the two approaches; however, trimming was able to keep more reads so I moved forward with the trimmed reads.There is still room here to explore alternative filtering and trimming tools and thresholds to optimize the quality of the data.
 
-**More detailed notes:** [[02_quality_filter]]
+**More detailed notes:** [burgess_notebook/02_quality_filter.md](burgess_notebook/02_quality_filter.md)
 
 Here is the `fastqc` report of the trimmed reads. we likely need to maybe trim more stringenly and clean up the tails.
 
@@ -45,7 +45,7 @@ After 1 round of assembly (8h run time) we an N50 of 36445 which is really good;
 
 Inorder to get coverage information (abundance) about the contigs I explored a few different alignment tools: `bbmap`, `bowtie2`, and `minimap2`. Both `bbmap` and `bowtie2` didn't work great. `bbmap` didn't like having really long reads it was trying to map back to the reference while `bowtie2` had a lot of warnings and tool a LONG time. Therefore, I think the only feasible tool to use moving forward is `minimap2` which was fast and was designed to work on ONT sequencing data.
 
-**More detailed notes:** [[03_assembly]]
+**More detailed notes:** [burgess_notebook/03_assembly.md](burgess_notebook/03_assembly.md)
 ### 04 DRAM Annotation
 
 The next step is to annotate the contigs/long reads to see what genes/functions we have. For this step I used a wrapper tool called [DRAM](https://github.com/WrightonLabCSU/DRAM) is techinally designed to annotate single genomes; however, it can be adapted to the soil's metagenome.
@@ -58,7 +58,7 @@ There were a few hiccups with using the contigs and unmapped reads the primary b
 
 `DRAM` is nice since it annotates all the genes across multiple databases and has a limited ability to distill the gene level information into functional groups. If we want to move forward with metagenomic sequencing we should really consider getting a `KEGG` subscription which `DRAM` works really well with. We can do it without `KEGG` by using `uniref` but it will likely dramatically increase computation time and `DRAM` has a more limited ability to distill that database. This is something we will likely need to consult someone over to see if it would be worth while. Alternatively, we could reduce computational time by pruning our `uniref` database down to functions/genes we care about but that is a non trivial endevor.
 
-**More detailed notes:** [[04_dram_annotation]]
+**More detailed notes:** [burgess_notebook/04_dram_annotation.md](burgess_notebook/04_dram_annotation.md)
 ### 05 Metagenomic Assembled Genomes 
 
 Another approach to annotating the metagenomic data is to first group our sequences into Metagenomic Assembled Genomes (MAGs) before annotation. A lot of people consider the gold standard because it allows you to contextualize the functions to a single genome and open doors such as reactive transport models. For generating MAGs I used the approach outline in this [Nature Protocols](https://www.nature.com/articles/s41596-022-00747-x).  [[chivianMetagenomeassembledGenomeExtraction2023]]
@@ -71,7 +71,7 @@ Firstly, I could not get `maxbin2` and `concoct` to work both have different err
 
 Regardly, even just taking the output from `metabat2` we were able to generate 15 good quality MAGs (<10% contamination and >70% completeness).
 
-**More detailed notes:** [[05_mag_generation]]
+**More detailed notes:** [burgess_notebook/05_mag_generation.md](burgess_notebook/05_mag_generation.md)
 ### Taxonomic annotation of reads
 
 Another step often used is to assign taxonomy to the read themselves through tools like [kraken2](https://github.com/DerrickWood/kraken2), [GOTTCHA](https://github.com/poeli/GOTTCHA2), and [centrifuge](http://www.ccb.jhu.edu/software/centrifuge/). However, I didn't explore this step since we will likely get a lot of diversity and this is already included in the [standard metagenomic workflow for ONT sequencing](https://github.com/epi2me-labs/wf-metagenomics)
