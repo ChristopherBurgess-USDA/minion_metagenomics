@@ -18,7 +18,7 @@ Each analysis step is organized into its own folder detailed below. A lot of the
 
 The raw data folder is where we covert the sequencing data from `.fast5` to `.pod5` which is the updated format storing raw sequencing data from a minion. The coversion from `fast5` to `pod5` will likely not be needed in the future; however, we will likely still need to split the sequencing data by channel in the future because without the channel split step, basecalling with `dorado duplex` will likely become computation unfeasible.
 
-**More detailed notes:** [[projects/2023/minion_metagenome/00_raw_data]]
+**More detailed notes:** [projects/2023/minion_metagenome/00_raw_data](projects/2023/minion_metagenome/00_raw_data)
 
 ### 01 Basecalls
 
